@@ -1,0 +1,1014 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww37900\viewh21300\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 SELECT * \
+FROM RMDB.movies;\
+\
+SELECT * \
+FROM RMDB.genres;\
+\
+--help to find genre code\
+select table_name from all_tab_columns where column_name = 'GENRE_CODE';\
+/* starting baseline movie queries\
+note we planned on doing the top 3 then the 2 most controversial movies\
+to create a total of 5 basline movies. It seems these 2 relationships are highly correlated.\
+I am just going to create top by imdb rates with movies with over 1000 votes\
+*/\
+\
+--BIO	Biography\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'BIO'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'BIO'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+-- BIO results\
+\
+--Schindler's List\
+--Goodfeels\
+--The Pianist\
+--The Intouchables\
+--Amadeus\
+--Ford v Ferrari\
+\
+--SCI	Sci-Fi\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'SCI'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'SCI'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--SCI results\
+\
+--Inception\
+--The Matrix\
+--Star Wars: Episode IV - A New Hope\
+--Interstellar\
+--Back to the Future\
+--Terminator\
+\
+--MYS	Mystery\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'MYS'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'MYS'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--MYS results\
+\
+--Se7en\
+--The Green Mile\
+--Psycho\
+--The Lives of Others\
+--Witness for the Prosecution\
+--The Invisible Guest\
+\
+--COM	Comedy\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'COM'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'COM'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--COM results\
+\
+--Parasite\
+--Life Is Beautiful\
+--City Lights\
+--The Intouchables\
+--Back to the Future\
+--Grand Budapest Hotel\
+\
+\
+\
+\
+--FAM	Family\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'FAM'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'FAM'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--FAM results\
+\
+--It's a Wounderful Life\
+--The Lion King\
+--Coco\
+--Toy Story\
+--The Kid\
+--Monsters, Inc.\
+\
+--ANM	Animation\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'ANM'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'ANM'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--ANM results\
+\
+--Grave of the Fireflies\
+--The Lion King\
+--Your Name.\
+--Coco\
+--Princess Mononoke\
+--How to Train Your Dragon\
+\
+\
+--MSL	Musical\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'MSL'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'MSL'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--MSL results\
+--Lagaan: Once Upon a Time in India\
+--Singin' in the Rain\
+--The Lion King\
+--Anand\
+--Hamilton\
+\
+--note there are only 5 movies for MSl\
+\
+\
+--THR	Thriller\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'THR'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'THR'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--THR results\
+\
+--The Dark Knight\
+--Inception\
+--The Silence of the Lambs\
+--Parasite\
+--Se7en\
+--Dial M for Murder\
+\
+\
+--FNR	Film-Noir\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'FNR'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'FNR'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--FNR results\
+\
+--The Third Man\
+---Double Indemnity\
+--Sunset Blvd\
+\
+--note there are only 3 movies for FNR\
+\
+--DRM	Drama\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'DRM'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'DRM'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--DRM results\
+\
+--The Shawnshank Redpemtion\
+--The Godfather: Part II\
+--The Dark Knight\
+--12 Angry Men\
+--Schinfler's List\
+--City Lights\
+\
+--ADV	Adventure\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'ADV'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'ADV'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--ADV results\
+\
+--Inception\
+--Seven Samurai\
+--Start Wars: Episod IV - A New Hope\
+--Interstellar\
+--The Lion King\
+--The General\
+\
+--WES	Western\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'WES'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'WES'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--WES results\
+\
+--The Good, the Bad and the Ugly\
+--Django Unchained\
+--For a Few Dollars More\
+--The Treasure of the Sierra Madre\
+--Unforgiven\
+--The Gold Rush\
+\
+--ROM	Romance\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'ROM'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'ROM'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--ROM results\
+\
+--Forrest Gump\
+--Life Is Beautiful\
+--City Lights\
+--Casablanca\
+--Your Name.\
+--Before Sunset\
+\
+--HOR	Horror\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'HOR'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'HOR'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--HOR results\
+\
+--Psycho\
+--Alien\
+--The Shining\
+--The Thing\
+\
+-- note HOR only has 4 movies\
+\
+--SPT	Sport\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'SPT'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'SPT'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--SPT results\
+\
+--Dangal\
+--Raging Bull\
+--Rush\
+--Rocky\
+--Ford v Ferrari\
+--Lagann: Once Upon a Time in India\
+\
+\
+\
+--ACT	Action\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'ACT'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'ACT'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--ACT results\
+\
+-- The Dark Knight\
+-- Inception\
+-- The Matrix\
+--Seven Samurai\
+--Start Wars: Eqisode IV - A New Hope\
+--Blade Runner\
+\
+--FAN	Fantasy\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'FAN'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'FAN'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--FAN results\
+\
+--It's a Wonderful Life\
+-- Start Wars: Episode IV - A New Hope\
+--The Green Mile\
+--Princess Monooke\
+--Your Name\
+--Harry Pott and the Deathly Hallows: Part 2\
+\
+--WAR	War\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'WAR'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'WAR'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--WAR results\
+\
+--Life Is Beautiful\
+--The Pianist\
+--Grave of the Fireflies\
+--Casablanca\
+--Paths of Glory\
+--Hacksaw Ridge\
+\
+--CRM	Crime\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'CRM'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'CRM'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--CRM results\
+\
+--The Godfather: Part II\
+--The Dark Knight\
+--12 Angry Men\
+--Pulp Fiction\
+--Goodfellas\
+--Rashomon\
+\
+--HIS	History\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'HIS'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'HIS'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--HIS results\
+\
+--Hamilton\
+--Amadeus\
+--12 Years a Slave\
+--Barry Lyndon\
+--Gone with the Wind\
+--Andrei Rublev\
+\
+--MSC	Music\
+\
+--the 5 movies \
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'MSC'\
+and mov.imdb_votes > 1000\
+and rownum <= 5\
+order by mov.imdb_rating desc\
+;\
+\
+--bad apples\
+SELECT \
+    mov.movie_guid,\
+    mov.movie_title,\
+    mov.imdb_rating,\
+    mov.imdb_votes,\
+    gen.genre_name,\
+    gen.genre_code\
+    \
+FROM RMDB.movies mov\
+left join RMDB.movie_genres gen\
+on mov.movie_guid = gen.movie_guid \
+where gen.genre_code = 'MSC'\
+and mov.imdb_votes > 1000\
+and rownum <= 25\
+order by mov.imdb_rating \
+;\
+\
+--MSC results\
+\
+--Whiplash\
+--Coco\
+--Amadeus\
+--Green Book\
+--Some Like It Hot\
+\
+--note MSC only has 5 movies}
